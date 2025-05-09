@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -59,12 +61,27 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
-              child: Container(
-                margin:
-                    EdgeInsets.only(right: marginRight, bottom: marginBottom),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  border: Border.all(color: Colors.grey.shade500, width: 10),
+              child: GestureDetector(
+                onPanUpdate: (details) {
+                  print("dx: ${details.delta.dx} dy: ${details.delta.dy}");
+                  setState(() {
+                    marginRight += -details.delta.dx;
+                    marginBottom += -details.delta.dy;
+                    if (marginRight < 0) {
+                      marginRight = 0;
+                    }
+                    if (marginBottom < 0) {
+                      marginBottom = 0;
+                    }
+                  });
+                },
+                child: Container(
+                  margin:
+                      EdgeInsets.only(right: marginRight, bottom: marginBottom),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    border: Border.all(color: Colors.grey.shade500, width: 10),
+                  ),
                 ),
               ),
             ),
