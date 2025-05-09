@@ -41,8 +41,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double marginRight = 0.0;
+  double marginBottom = 0.0;
+
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -54,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Expanded(
               child: Container(
+                margin:
+                    EdgeInsets.only(right: marginRight, bottom: marginBottom),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   border: Border.all(color: Colors.grey.shade500, width: 10),
@@ -66,6 +74,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton(
                     onPressed: () {}, child: const Text("Reset")),
               ),
+              Slider(
+                max: screenWidth * 0.8,
+                value: marginRight,
+                onChanged: (value) {
+                  setState(() {
+                    marginRight = value;
+                  });
+                },
+              ),
+              Slider(
+                max: screenHeight * 0.8,
+                value: marginBottom,
+                onChanged: (value) {
+                  setState(() {
+                    marginBottom = value;
+                  });
+                },
+              )
             ]),
           ],
         ),
