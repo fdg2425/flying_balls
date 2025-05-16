@@ -45,6 +45,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double marginRight = 0.0;
   double marginBottom = 0.0;
+  bool expertMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,13 +92,40 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                    onPressed: () {}, child: const Text("Reset")),
+            if (expertMode)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text("Speed:")]),
               ),
-            ]),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            expertMode = false;
+                          });
+                        },
+                        child: const Text("Reset")),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text("Add 1 ball")),
+                    if (!expertMode)
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              expertMode = true;
+                            });
+                          },
+                          child: const Text("Expert mode")),
+                    if (expertMode)
+                      ElevatedButton(
+                          onPressed: () {}, child: const Text("Add 10 ball")),
+                  ]),
+            ),
           ],
         ),
       ),
