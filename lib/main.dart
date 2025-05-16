@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white, // Text color
           ),
         ),
+        textTheme: const TextTheme(
+          bodyMedium:
+              TextStyle(color: Colors.blue), // default for medium body text
+          titleLarge: TextStyle(color: Colors.blue), // for headlines, titles
+        ),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flying balls'),
@@ -93,11 +98,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             if (expertMode)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [Text("Speed:")]),
+                    children: [
+                      Text("Speed:",
+                          style: Theme.of(context).textTheme.bodyMedium)
+                    ]),
               ),
             Padding(
               padding: const EdgeInsets.all(8.0),
