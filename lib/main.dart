@@ -73,6 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     if (marginBottom < 0) {
                       marginBottom = 0;
                     }
+                    if (marginRight > screenWidth * 0.8) {
+                      marginRight = screenWidth * 0.8;
+                    }
+                    if (marginBottom > screenHeight * 0.7) {
+                      marginBottom = screenHeight * 0.7;
+                    }
                   });
                 },
                 child: Container(
@@ -91,24 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton(
                     onPressed: () {}, child: const Text("Reset")),
               ),
-              Slider(
-                max: screenWidth * 0.8,
-                value: marginRight,
-                onChanged: (value) {
-                  setState(() {
-                    marginRight = value;
-                  });
-                },
-              ),
-              Slider(
-                max: screenHeight * 0.8,
-                value: marginBottom,
-                onChanged: (value) {
-                  setState(() {
-                    marginBottom = value;
-                  });
-                },
-              )
             ]),
           ],
         ),
