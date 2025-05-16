@@ -94,12 +94,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.black,
                     border: Border.all(color: Colors.grey.shade500, width: 10),
                   ),
+                  child: Stack(children: [
+                    Positioned(
+                        top: 100,
+                        // bottom: 300,
+                        left: 100,
+                        child: Container(
+                            width: 250, height: 150, color: Colors.green)),
+                    Positioned(
+                        top: 200,
+                        left: 150,
+                        child: Container(
+                            width: 200, height: 100, color: Colors.yellow))
+                  ]),
                 ),
               ),
             ),
             if (expertMode)
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
