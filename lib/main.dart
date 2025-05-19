@@ -51,6 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
   double marginRight = 0.0;
   double marginBottom = 0.0;
   bool expertMode = false;
+  double yellowTop = 100;
+  double yellowLeft = 300;
+  double yellowWidth = 250;
+  double yellowHeight = 100;
+  double borderWidth = 10;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       EdgeInsets.only(right: marginRight, bottom: marginBottom),
                   decoration: BoxDecoration(
                     color: Colors.black,
-                    border: Border.all(color: Colors.grey.shade500, width: 10),
+                    border: Border.all(
+                        color: Colors.grey.shade500, width: borderWidth),
                   ),
                   child: Stack(children: [
                     Positioned(
@@ -102,10 +108,31 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Container(
                             width: 250, height: 150, color: Colors.green)),
                     Positioned(
-                        top: 200,
-                        left: 150,
-                        child: Container(
-                            width: 200, height: 100, color: Colors.yellow))
+                        top: yellowTop,
+                        left: yellowLeft,
+                        child: GestureDetector(
+                          onPanUpdate: (details) {
+                            setState(() {
+                              yellowLeft += details.delta.dx;
+                              if (yellowLeft < 0) {
+                                yellowLeft = 0;
+                              }
+                              if (yellowLeft >
+                                  screenWidth - yellowWidth - 2 * borderWidth) {
+                                yellowLeft =
+                                    screenWidth - yellowWidth - 2 * borderWidth;
+                              }
+                              yellowTop += details.delta.dy;
+                              if (yellowTop < 0) {
+                                yellowTop = 0;
+                              }
+                            });
+                          },
+                          child: Container(
+                              width: yellowWidth,
+                              height: yellowHeight,
+                              color: Colors.yellow),
+                        ))
                   ]),
                 ),
               ),
