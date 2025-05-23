@@ -73,6 +73,22 @@ class _MyHomePageState extends State<MyHomePage> {
     if (expertMode) {
       stackHeight -= bottomRowHeight;
     }
+
+// force the yellow container into the stack in every build
+    if (yellowLeft < 0) {
+      yellowLeft = 0;
+    }
+    if (yellowLeft > stackWidth - yellowWidth) {
+      yellowLeft = stackWidth - yellowWidth;
+    }
+
+    if (yellowTop < 0) {
+      yellowTop = 0;
+    }
+    if (yellowTop > stackHeight - yellowHeight) {
+      yellowTop = stackHeight - yellowHeight;
+    }
+
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -125,19 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPanUpdate: (details) {
                             setState(() {
                               yellowLeft += details.delta.dx;
-                              if (yellowLeft < 0) {
-                                yellowLeft = 0;
-                              }
-                              if (yellowLeft > stackWidth - yellowWidth) {
-                                yellowLeft = stackWidth - yellowWidth;
-                              }
                               yellowTop += details.delta.dy;
-                              if (yellowTop < 0) {
-                                yellowTop = 0;
-                              }
-                              if (yellowTop > stackHeight - yellowHeight) {
-                                yellowTop = stackHeight - yellowHeight;
-                              }
                             });
                           },
                           child: Container(
