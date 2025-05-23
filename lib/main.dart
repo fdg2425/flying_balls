@@ -56,12 +56,23 @@ class _MyHomePageState extends State<MyHomePage> {
   double yellowWidth = 250;
   double yellowHeight = 100;
   double borderWidth = 10;
+  double bottomRowHeight = 45;
 
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
+    var stackWidth = screenWidth - 2 * borderWidth - marginRight;
+    var stackHeight = screenHeight -
+        MediaQuery.of(context).padding.top -
+        kToolbarHeight -
+        2 * borderWidth -
+        bottomRowHeight -
+        marginBottom;
 
+    if (expertMode) {
+      stackHeight -= bottomRowHeight;
+    }
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -117,14 +128,15 @@ class _MyHomePageState extends State<MyHomePage> {
                               if (yellowLeft < 0) {
                                 yellowLeft = 0;
                               }
-                              if (yellowLeft >
-                                  screenWidth - yellowWidth - 2 * borderWidth) {
-                                yellowLeft =
-                                    screenWidth - yellowWidth - 2 * borderWidth;
+                              if (yellowLeft > stackWidth - yellowWidth) {
+                                yellowLeft = stackWidth - yellowWidth;
                               }
                               yellowTop += details.delta.dy;
                               if (yellowTop < 0) {
                                 yellowTop = 0;
+                              }
+                              if (yellowTop > stackHeight - yellowHeight) {
+                                yellowTop = stackHeight - yellowHeight;
                               }
                             });
                           },
@@ -138,7 +150,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             if (expertMode)
-              Padding(
+              Container(
+                height: bottomRowHeight,
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,7 +160,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: Theme.of(context).textTheme.bodyMedium)
                     ]),
               ),
-            Padding(
+            Container(
+              height: bottomRowHeight,
               padding: const EdgeInsets.all(8.0),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
