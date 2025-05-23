@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,6 +59,26 @@ class _MyHomePageState extends State<MyHomePage> {
   double yellowHeight = 100;
   double borderWidth = 10;
   double bottomRowHeight = 45;
+  double speedX = 10;
+  double speedY = 5;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    _timer = Timer.periodic(const Duration(milliseconds: 20), (Timer timer) {
+      setState(() {
+        yellowLeft += speedX;
+        yellowTop += speedY;
+      });
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,16 +99,20 @@ class _MyHomePageState extends State<MyHomePage> {
 // force the yellow container into the stack in every build
     if (yellowLeft < 0) {
       yellowLeft = 0;
+      speedX = -speedX;
     }
     if (yellowLeft > stackWidth - yellowWidth) {
       yellowLeft = stackWidth - yellowWidth;
+      speedX = -speedX;
     }
 
     if (yellowTop < 0) {
       yellowTop = 0;
+      speedY = -speedY;
     }
     if (yellowTop > stackHeight - yellowHeight) {
       yellowTop = stackHeight - yellowHeight;
+      speedY = -speedY;
     }
 
     return Scaffold(
