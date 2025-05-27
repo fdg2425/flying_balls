@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'ball.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -64,14 +66,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Timer? _timer;
   int timerCounter = 0;
   int buildCounter = 0;
+  var ball = Ball();
 
   @override
   void initState() {
     _timer = Timer.periodic(const Duration(milliseconds: 20), (Timer timer) {
       setState(() {
         timerCounter++;
-        yellowLeft += speedX;
-        yellowTop += speedY;
+        // yellowLeft += speedX;
+        // yellowTop += speedY;
+        ball.move();
       });
     });
     super.initState();
@@ -100,24 +104,24 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
 // force the yellow container into the stack in every build
-    if (yellowLeft < 0) {
-      yellowLeft = 0;
-      speedX = -speedX;
-    }
-    if (yellowLeft > stackWidth - yellowWidth) {
-      yellowLeft = stackWidth - yellowWidth;
-      speedX = -speedX;
-    }
+    // if (yellowLeft < 0) {
+    //   yellowLeft = 0;
+    //   speedX = -speedX;
+    // }
+    // if (yellowLeft > stackWidth - yellowWidth) {
+    //   yellowLeft = stackWidth - yellowWidth;
+    //   speedX = -speedX;
+    // }
 
-    if (yellowTop < 0) {
-      yellowTop = 0;
-      speedY = -speedY;
-    }
-    if (yellowTop > stackHeight - yellowHeight) {
-      yellowTop = stackHeight - yellowHeight;
-      speedY = -speedY;
-    }
-
+    // if (yellowTop < 0) {
+    //   yellowTop = 0;
+    //   speedY = -speedY;
+    // }
+    // if (yellowTop > stackHeight - yellowHeight) {
+    //   yellowTop = stackHeight - yellowHeight;
+    //   speedY = -speedY;
+    // }
+    ball.bounce(stackWidth, stackHeight);
     buildCounter++;
 
     return Scaffold(
@@ -162,11 +166,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: Stack(children: [
                     Positioned(
-                        top: 100,
+                        top: ball.top,
                         // bottom: 300,
-                        left: 100,
+                        left: ball.left,
                         child: Container(
-                            width: 250, height: 150, color: Colors.green)),
+                            width: ball.diameter,
+                            height: ball.diameter,
+                            color: Colors.green)),
                     Positioned(
                         top: yellowTop,
                         left: yellowLeft,
