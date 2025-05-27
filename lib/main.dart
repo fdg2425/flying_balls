@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    _timer = Timer.periodic(const Duration(milliseconds: 1), (Timer timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 20), (Timer timer) {
       setState(() {
         timerCounter++;
         yellowLeft += speedX;
@@ -122,9 +122,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-          //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(widget.title),
-          actions: [Text("$timerCounter, $buildCounter")]),
+        //backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+        // do not show counters in the AppBar because they are hidden by the Debug banner
+        //actions: [Text("$timerCounter, $buildCounter")]
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
