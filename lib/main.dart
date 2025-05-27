@@ -178,26 +178,26 @@ class _MyHomePageState extends State<MyHomePage> {
                             width: ball.diameter,
                             height: ball.diameter,
                             //color: Colors.green,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.blue, // Color of the circle
+                              color: ball.color, // Color of the circle
                             ),
                           )),
-                    Positioned(
-                        top: yellowTop,
-                        left: yellowLeft,
-                        child: GestureDetector(
-                          onPanUpdate: (details) {
-                            setState(() {
-                              yellowLeft += details.delta.dx;
-                              yellowTop += details.delta.dy;
-                            });
-                          },
-                          child: Container(
-                              width: yellowWidth,
-                              height: yellowHeight,
-                              color: Colors.yellow),
-                        )),
+                    // Positioned(
+                    //     top: yellowTop,
+                    //     left: yellowLeft,
+                    //     child: GestureDetector(
+                    //       onPanUpdate: (details) {
+                    //         setState(() {
+                    //           yellowLeft += details.delta.dx;
+                    //           yellowTop += details.delta.dy;
+                    //         });
+                    //       },
+                    //       child: Container(
+                    //           width: yellowWidth,
+                    //           height: yellowHeight,
+                    //           color: Colors.yellow),
+                    //     )),
                     Positioned(
                       top: 10,
                       right: 10,
@@ -236,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            balls.add(Ball());
+                            balls.add(Ball.random());
                           });
                         },
                         child: const Text("Add 1 ball")),
