@@ -215,7 +215,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Speed:",
-                          style: Theme.of(context).textTheme.bodyMedium)
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      Expanded(
+                        child: Slider(
+                          label: Ball.speedFactor.toStringAsFixed(1),
+                          divisions: 10,
+                          max: 5,
+                          value: Ball.speedFactor,
+                          onChanged: (value) {
+                            setState(() {
+                              Ball.speedFactor = value;
+                            });
+                          },
+                        ),
+                      )
                     ]),
               ),
             Container(

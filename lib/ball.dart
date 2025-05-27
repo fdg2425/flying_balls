@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Ball {
+  static double speedFactor = 1;
   double left = 0;
   double top = 10;
   double speedX = 10;
@@ -23,8 +24,8 @@ class Ball {
   }
 
   void move() {
-    left += speedX;
-    top += speedY;
+    left += speedX * speedFactor;
+    top += speedY * speedFactor;
   }
 
   void bounce(double stackWidth, double stackHeight) {
