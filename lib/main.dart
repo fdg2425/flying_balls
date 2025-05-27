@@ -214,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Speed:",
+                      Text("Speed / Gravity:",
                           style: Theme.of(context).textTheme.bodyMedium),
                       Expanded(
                         child: Slider(
@@ -225,6 +225,19 @@ class _MyHomePageState extends State<MyHomePage> {
                           onChanged: (value) {
                             setState(() {
                               Ball.speedFactor = value;
+                            });
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: Slider(
+                          label: Ball.acceleration.toStringAsFixed(1),
+                          divisions: 10,
+                          max: 5,
+                          value: Ball.acceleration,
+                          onChanged: (value) {
+                            setState(() {
+                              Ball.acceleration = value;
                             });
                           },
                         ),

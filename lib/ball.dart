@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class Ball {
   static double speedFactor = 1;
+  static double acceleration = 0;
   double left = 0;
   double top = 10;
   double speedX = 10;
@@ -25,6 +26,7 @@ class Ball {
 
   void move() {
     left += speedX * speedFactor;
+    speedY += acceleration;
     top += speedY * speedFactor;
   }
 
