@@ -223,6 +223,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         onPressed: () {
                           setState(() {
                             expertMode = false;
+                            balls.clear();
+                            balls.add(Ball());
                           });
                         },
                         child: const Text("Reset")),
