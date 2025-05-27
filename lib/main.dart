@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Timer? _timer;
   int timerCounter = 0;
   int buildCounter = 0;
-  var ball = Ball();
+  List<Ball> balls = [Ball()];
 
   @override
   void initState() {
@@ -75,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
         timerCounter++;
         // yellowLeft += speedX;
         // yellowTop += speedY;
-        ball.move();
+        for (var ball in balls) {
+          ball.move();
+        }
       });
     });
     super.initState();
@@ -121,7 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
     //   yellowTop = stackHeight - yellowHeight;
     //   speedY = -speedY;
     // }
-    ball.bounce(stackWidth, stackHeight);
+    for (var ball in balls) {
+      ball.bounce(stackWidth, stackHeight);
+    }
     buildCounter++;
 
     return Scaffold(
@@ -165,14 +169,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.grey.shade500, width: borderWidth),
                   ),
                   child: Stack(children: [
-                    Positioned(
-                        top: ball.top,
-                        // bottom: 300,
-                        left: ball.left,
-                        child: Container(
-                            width: ball.diameter,
-                            height: ball.diameter,
-                            color: Colors.green)),
+                    for (var ball in balls)
+                      Positioned(
+                          top: ball.top,
+                          // bottom: 300,
+                          left: ball.left,
+                          child: Container(
+                              width: ball.diameter,
+                              height: ball.diameter,
+                              color: Colors.green)),
                     Positioned(
                         top: yellowTop,
                         left: yellowLeft,
@@ -222,7 +227,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         },
                         child: const Text("Reset")),
                     ElevatedButton(
-                        onPressed: () {}, child: const Text("Add 1 ball")),
+                        onPressed: () {
+                          setState(() {
+                            balls.add(Ball());
+                          });
+                        },
+                        child: const Text("Add 1 ball")),
                     if (!expertMode)
                       ElevatedButton(
                           onPressed: () {
