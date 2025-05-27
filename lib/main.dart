@@ -175,9 +175,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           // bottom: 300,
                           left: ball.left,
                           child: Container(
-                              width: ball.diameter,
-                              height: ball.diameter,
-                              color: Colors.green)),
+                            width: ball.diameter,
+                            height: ball.diameter,
+                            //color: Colors.green,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.blue, // Color of the circle
+                            ),
+                          )),
                     Positioned(
                         top: yellowTop,
                         left: yellowLeft,
