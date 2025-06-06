@@ -188,9 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             height: ball.diameter,
                             //color: Colors.green,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ball.color, // Color of the circle
-                            ),
+                                shape: BoxShape.circle,
+                                color: ball.color, // Color of the circle
+                                gradient: ball.getGradient()),
                           )),
                     // Positioned(
                     //     top: yellowTop,
@@ -228,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         child: Slider(
                           label: Ball.speedFactor.toStringAsFixed(1),
-                          divisions: 10,
+                          divisions: 50,
                           max: 5,
                           value: Ball.speedFactor,
                           onChanged: (value) {
@@ -241,8 +241,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         child: Slider(
                           label: Ball.acceleration.toStringAsFixed(1),
-                          divisions: 10,
-                          max: 5,
+                          divisions: 50,
+                          max: 2,
                           value: Ball.acceleration,
                           onChanged: (value) {
                             setState(() {

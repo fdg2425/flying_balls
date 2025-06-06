@@ -11,6 +11,7 @@ class Ball {
   double speedY = 5;
   double diameter = 20;
   Color color = Colors.blue;
+  Color color1 = Colors.yellow;
 
   Ball();
 
@@ -20,8 +21,18 @@ class Ball {
     diameter = 2 + 40 * random.nextDouble();
     speedX = 0.5 + 4 * random.nextDouble();
     speedY = 0.5 + 4 * random.nextDouble();
-    color = Color.fromARGB(
-        255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+    int r = random.nextInt(100);
+    int g = random.nextInt(100);
+    int b = random.nextInt(100);
+    color = Color.fromARGB(255, r, g, b);
+    color1 = Color.fromARGB(255, r + 156, g + 156, b + 156);
+  }
+
+  Gradient getGradient() {
+    return LinearGradient(
+        colors: [color1, color],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight);
   }
 
   void move() {
