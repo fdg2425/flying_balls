@@ -164,10 +164,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin:
                       EdgeInsets.only(right: marginRight, bottom: marginBottom),
                   decoration: BoxDecoration(
-                    color: Colors.black,
-                    border: Border.all(
-                        color: Colors.grey.shade500, width: borderWidth),
-                  ),
+                      color: Colors.black,
+                      border: Border(
+                          top: BorderSide(
+                              color: Colors.grey, width: borderWidth),
+                          left: BorderSide(
+                              color: const Color.fromARGB(255, 119, 117, 117),
+                              width: borderWidth),
+                          right: BorderSide(
+                              color: const Color.fromARGB(255, 223, 217, 217),
+                              width: borderWidth),
+                          bottom: BorderSide(
+                              color: const Color.fromARGB(255, 207, 203, 203),
+                              width: borderWidth))),
                   child: Stack(children: [
                     for (var ball in balls)
                       Positioned(
@@ -276,7 +285,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: const Text("Expert mode")),
                     if (expertMode)
                       ElevatedButton(
-                          onPressed: () {}, child: const Text("Add 10 ball")),
+                          onPressed: () {
+                            setState(() {
+                              for (var i = 0; i < 10; i++) {
+                                balls.add(Ball.random());
+                              }
+                            });
+                          },
+                          child: const Text("Add 10 balls")),
                   ]),
             ),
           ],
