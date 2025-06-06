@@ -5,13 +5,22 @@ import 'package:flutter/material.dart';
 class Ball {
   static double speedFactor = 1;
   static double acceleration = 0;
-  double left = 0;
+  double _left = 0;
+
+  double get left => _left;
+
+  set left(double value) {
+    if (value >= 0) {
+      _left = value;
+    }
+  }
+
   double top = 10;
   double speedX = 10;
   double speedY = 5;
   double diameter = 20;
-  Color color = Colors.blue;
-  Color color1 = Colors.yellow;
+  Color _color = Colors.blue;
+  Color _color1 = Colors.yellow;
 
   Ball();
 
@@ -24,13 +33,13 @@ class Ball {
     int r = random.nextInt(100);
     int g = random.nextInt(100);
     int b = random.nextInt(100);
-    color = Color.fromARGB(255, r, g, b);
-    color1 = Color.fromARGB(255, r + 156, g + 156, b + 156);
+    _color = Color.fromARGB(255, r, g, b);
+    _color1 = Color.fromARGB(255, r + 156, g + 156, b + 156);
   }
 
   Gradient getGradient() {
     return LinearGradient(
-        colors: [color1, color],
+        colors: [_color1, _color],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight);
   }

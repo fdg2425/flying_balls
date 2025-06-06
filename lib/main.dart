@@ -189,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             //color: Colors.green,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: ball.color, // Color of the circle
+                                //color: ball._color, // Color of the circle
                                 gradient: ball.getGradient()),
                           )),
                     // Positioned(
